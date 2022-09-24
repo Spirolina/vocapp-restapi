@@ -6,6 +6,7 @@ import passport from 'passport';
 import {connectDB} from './configs/mongooseConfig.js'
 import authConfig from './configs/authConfig.js'
 import api from './routes/api.js'
+import { errorLogger, errorResponder } from './modules/ErrorModule.js';
 
 // dotenv init
 dotenv.config()
@@ -39,8 +40,8 @@ app.use('/api', api)
 app.get('/', (req, res) => {
     res.send('hello world');
   });
-
-
+app.use(errorLogger)
+app.use(errorResponder)
   //listen on port
 app.listen(process.env.PORT || 5000, (req, res) => {
   console.log('Listening on port 5000')

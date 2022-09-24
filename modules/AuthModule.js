@@ -1,5 +1,7 @@
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv' 
+dotenv.config()
 
 const PRIV_KEY = process.env.PRIVATE_KEY;
 
@@ -35,7 +37,8 @@ export const issueJwt = (user) => {
 
   const signedToken = jwt.sign(
     payload,
-    PRIV_KEY,
+    {key: PRIV_KEY, passphrase:process.env.PASSPHRASE},
+
     {
       expiresIn,
       algorithm: 'RS256',

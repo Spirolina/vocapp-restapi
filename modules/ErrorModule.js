@@ -4,13 +4,18 @@ export const errorLogger = (error, req, res, next) => {
 }
 
 export const errorResponder = (error, req, res, next) => {
-    if (error.type = 'not-found')
+    // duplicate key
+    if (error.code === 11000) { 
         res
-            .status(404)
+            .status(400)
             .json({
-                msg: 'not found'
-            })
-    else
-        next(error);
+                msg: 'this username is already taken'
+            });
+        return;
+    }
+  
+    
+    next(error)
+
 
 }
