@@ -28,7 +28,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
     try {
         const { username, password } = req.body;
-        const user = await User.findOne({ username }, {salt :1, hash:1}
+        const user = await User.findOne({ username }, { salt: 1, hash: 1 }
         );
         
         if (!user) {
@@ -37,6 +37,7 @@ export const login = async (req, res, next) => {
                 .json({ msg: 'user not found!' });
             return;
         }
+        
         const { hash, salt } = user;
         const valid = validPassword(password, hash, salt);
 
@@ -48,21 +49,14 @@ export const login = async (req, res, next) => {
                 })
             return;
         }
-        
-       
+
         const token = issueJwt(user);
         res.json({
             msg: 'succesfully logged in',
             token,
         });
-    
-
 
     } catch (error) {
         next(error);
     }
-    
-
-
-    
-}
+};
