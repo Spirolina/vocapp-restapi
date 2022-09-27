@@ -14,8 +14,13 @@ export const register = async (req, res, next) => {
 
         if (user) {
             const token = issueJwt(user);
+            const payload = {
+                username: user.username,
+                _id: user._id
+            }
             res.json({
                 msg: 'succesfully created',
+                payload,
                 token,
             })
         }
@@ -50,9 +55,14 @@ export const login = async (req, res, next) => {
             return;
         }
 
+        const payload = {
+            username: user.username,
+            _id: user._id
+        }
         const token = issueJwt(user);
         res.json({
             msg: 'succesfully logged in',
+            payload,
             token,
         });
 
