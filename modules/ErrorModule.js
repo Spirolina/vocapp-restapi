@@ -9,7 +9,8 @@ export const errorResponder = (error, req, res, next) => {
         res
             .status(400)
             .json({
-                msg: 'this username is already taken'
+                msg: 'this username is already taken',
+                errorType: 'username'
             });
         return;
     }

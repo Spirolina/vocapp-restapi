@@ -39,7 +39,10 @@ export const login = async (req, res, next) => {
         if (!user) {
             res
                 .status(404)
-                .json({ msg: 'user not found!' });
+                .json({
+                    msg: 'user not found!',
+                    errorType: 'username'
+                });
             return;
         }
         
@@ -50,7 +53,8 @@ export const login = async (req, res, next) => {
             res
                 .status(401)
                 .json({
-                    msg: 'your username or password is wrong!'
+                    msg: 'your password is wrong!',
+                    errorType: 'password'
                 })
             return;
         }
