@@ -7,7 +7,7 @@ import meaningRoutes from './meaningRoutes.js'
 const router = express.Router();
 
 router.use('/users', userRoutes)
-router.use('/word', wordRoutes)
+router.use('/words', wordRoutes)
 router.use('/meaning', meaningRoutes)
 
 
@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
     message: 'Hello api routes',
   });
 });
+
 
 
 

@@ -3,11 +3,15 @@ const { Schema } = mongoose;
 
 const WordSchema = new Schema({
     word: { type: mongoose.SchemaTypes.String, required: true },
-    meaning: { type: mongoose.SchemaTypes.String },
-    phonetics: {
-        text: { type: mongoose.SchemaTypes.String },
-        audio: { type: mongoose.SchemaTypes.String }
-    }
+    partOfSpeech: {type: mongoose.SchemaTypes.String, required: true},
+    definition: { type: mongoose.SchemaTypes.String },
+    examples: [
+        {type: mongoose.SchemaTypes.String}
+    ],
+    image: {
+        data: { type: mongoose.SchemaTypes.Buffer },
+        contentType: {type: mongoose.SchemaTypes.String}
+    } 
 });
 
 const Word = new mongoose.model('Word', WordSchema);

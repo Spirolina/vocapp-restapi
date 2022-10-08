@@ -1,4 +1,5 @@
 import express from 'express';
+import { addWord } from '../controllers/wordController.js';
 
 
 const router = express.Router();
@@ -9,6 +10,8 @@ router.get('/', (req, res) => {
     message: 'Hello word routes',
   });
 });
+
+router.post('/add', addWord)
 
 
 
