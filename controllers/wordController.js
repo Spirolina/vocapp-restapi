@@ -6,8 +6,8 @@ export const addWord = async (req, res, next) => {
         partOfSpeech,
         definition,
         examples,
-        imageData,
-        imageContentType } = req.body;
+        imageUri,
+        } = req.body;
     
     
     const myWord = await new Word({
@@ -15,10 +15,7 @@ export const addWord = async (req, res, next) => {
         partOfSpeech,
         definition,
         examples, 
-        image: {
-            data: imageData,
-            contentType: imageContentType
-        }
+        imageUri
     }).save()
         
         if (myWord) {

@@ -8,10 +8,7 @@ const WordSchema = new Schema({
     examples: [
         {type: mongoose.SchemaTypes.String}
     ],
-    image: {
-        data: { type: mongoose.SchemaTypes.Buffer },
-        contentType: {type: mongoose.SchemaTypes.String}
-    } 
+    imageUri: { type: mongoose.SchemaTypes.String} 
 });
 
 const Word = new mongoose.model('Word', WordSchema);
