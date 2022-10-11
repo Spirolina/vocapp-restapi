@@ -1,6 +1,8 @@
 import Word from "../models/Word.js";
+import User from '../models/User.js'
 
 export const addWord = async (req, res, next) => {
+    const _id = req.user._id;
     try {
         const { word,
         partOfSpeech,
@@ -8,27 +10,39 @@ export const addWord = async (req, res, next) => {
         examples,
         imageUri,
         } = req.body;
-    
-    
-    const myWord = await new Word({
-        word, 
-        partOfSpeech,
-        definition,
-        examples, 
-        imageUri
-    }).save()
-        
+
+        const myWord = await new Word({
+            word,
+            partOfSpeech,
+            definition,
+            examples,
+            imageUri
+        }).save();
+
         if (myWord) {
-            console.log('success')
+          const result = await User.findOneAndUpdate({ _id, },
+                {
+                $push: {words: myWord}
+              })
+            
+            if (!result) {
+                res
+                    .status(400)
+                    .json({
+                        msg: 'Word did not added!'
+                    })
+                return;
+            }
+            
+            
             res.json({
             msg: 'Your word added successfully.'
         })
-    }
-        
+        };
     }
     catch (error) {
         next(error)
-    }
+    };
 
 
 }

@@ -1,17 +1,18 @@
 import express from 'express';
+import passport from 'passport';
 import { addWord } from '../controllers/wordController.js';
 
 
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   res.json({
     message: 'Hello word routes',
   });
 });
 
-router.post('/add', addWord)
+router.post('/add', passport.authenticate('jwt', {session: false}), addWord)
 
 
 
