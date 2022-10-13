@@ -43,6 +43,28 @@ export const addWord = async (req, res, next) => {
     catch (error) {
         next(error)
     };
+}
+
+export const getWords = async (req, res, next) => {
+    try {
+        const _id = req.user._id;
+        const user = await User.findById(_id, { words: 1 })
+            .populate('words');
+        const userWords = user.words;
+        if (!userWords) {
+            res.json({
+                msg: 'there is no word!'
+            })
+            return;
+        }
+
+        res.json({
+            words: userWords
+        })
+    } catch (error) {
+        next(error);
+    }
+    
 
 
 }
