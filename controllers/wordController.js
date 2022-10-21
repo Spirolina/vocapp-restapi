@@ -64,7 +64,22 @@ export const getWords = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-    
+}
 
+export const deleteWord = async (req, res, next) => {
+    try {
+        const { _id } = req.params;
+        const result = await Word.deleteOne({ _id: _id });
+        if (!result) {
+            res.
+                status(404)
+                .json({msg: 'Word is not found!'})
+        }
 
+        res
+        .json({ msg: 'Word deleted successfully!' });
+
+    } catch (err) {
+        next(err);
+    }
 }
