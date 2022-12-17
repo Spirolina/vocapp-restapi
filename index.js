@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv' 
 import express from 'express'
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -9,7 +8,6 @@ import api from './routes/api.js'
 import { errorLogger, errorResponder } from './modules/ErrorModule.js';
 
 // dotenv init
-dotenv.config()
 
 // cors options
 const corsOptions = {
