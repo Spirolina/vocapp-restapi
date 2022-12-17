@@ -68,12 +68,13 @@ export const getWords = async (req, res, next) => {
 
 export const deleteWord = async (req, res, next) => {
     try {
-        const { _id } = req.params;
-        const result = await Word.deleteOne({ _id: _id });
-        if (!result) {
+        const { id } = req.params;
+        const result = await Word.deleteOne({ _id: id });
+        if (!result.deletedCount) {
             res.
                 status(404)
-                .json({msg: 'Word is not found!'})
+                .json({ msg: 'Word is not found!' })
+            return;
         }
 
         res

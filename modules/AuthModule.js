@@ -1,7 +1,5 @@
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv' 
-dotenv.config()
 
 const PRIV_KEY = process.env.PRIVATE_KEY;
 
